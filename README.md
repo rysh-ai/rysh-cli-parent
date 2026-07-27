@@ -45,11 +45,10 @@ export PATH="$HOME/.local/bin:$PATH"
 ### With `go install`
 
 ```sh
-go install github.com/rysh-ai/rysh-cli-code@latest
+go install github.com/rysh-ai/rysh-cli-code/cmd/rysh@latest
 ```
 
-This drops the binary in `$(go env GOPATH)/bin`, named `rysh-cli-code`. Rename it
-to `rysh` if you want the short command.
+This drops a binary named `rysh` in `$(go env GOPATH)/bin`.
 
 **Requirements:** Go 1.25.3 or newer, and a POSIX terminal. Linux and macOS are
 what we build and test on.

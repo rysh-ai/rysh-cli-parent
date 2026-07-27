@@ -43,7 +43,7 @@ bootstrap: ## Fetch the submodules
 
 build: bootstrap ## Build the rysh binary into bin/
 	@mkdir -p bin
-	cd $(CODE) && $(GO) build -trimpath -ldflags '$(LDFLAGS)' -o ../$(BIN) .
+	cd $(CODE) && $(GO) build -trimpath -ldflags '$(LDFLAGS)' -o ../$(BIN) ./cmd/rysh
 	@echo "built $(BIN) ($(VERSION))"
 
 install: build ## Install the binary into ~/.local/bin (override with PREFIX=)
