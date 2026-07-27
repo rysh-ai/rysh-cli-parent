@@ -29,8 +29,10 @@ LDFLAGS := -s -w \
 # against the published rysh-cli-shared instead of the sibling one.
 export GOWORK := $(CURDIR)/go.work
 
+PREFIX ?= $(HOME)/.local
+
 .DEFAULT_GOAL := build
-.PHONY: help bootstrap build test vet fmt-check ci clean
+.PHONY: help bootstrap build install test vet fmt-check ci clean
 
 help: ## List targets
 	@grep -hE '^[a-z-]+:.*?## ' $(MAKEFILE_LIST) \
@@ -43,6 +45,11 @@ build: bootstrap ## Build the rysh binary into bin/
 	@mkdir -p bin
 	cd $(CODE) && $(GO) build -trimpath -ldflags '$(LDFLAGS)' -o ../$(BIN) .
 	@echo "built $(BIN) ($(VERSION))"
+
+install: build ## Install the binary into ~/.local/bin (override with PREFIX=)
+	install -d $(PREFIX)/bin
+	install $(BIN) $(PREFIX)/bin/rysh
+	@echo "installed $(PREFIX)/bin/rysh — make sure $(PREFIX)/bin is on your PATH"
 
 test: ## Run the test suite of both modules
 	cd $(SHARED) && $(GO) test ./...
