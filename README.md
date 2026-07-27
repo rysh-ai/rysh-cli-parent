@@ -22,6 +22,7 @@ This repository is the **build workspace**. The code lives in two submodules:
 | --- | --- |
 | [`rysh-cli-code`](https://github.com/rysh-ai/rysh-cli-code) | the CLI, the TUI, the actors, the terminal emulator |
 | [`rysh-cli-shared`](https://github.com/rysh-ai/rysh-cli-shared) | agentic orchestration, provider adapters, message types, secret redaction |
+| [`rysh-cli-app-code`](https://github.com/rysh-ai/rysh-cli-app-code) | Rysh Desktop (Electron) and the web renderer the CLI serves |
 
 ## Install
 
@@ -65,8 +66,9 @@ rysh onboard --provider anthropic --key-env ANTHROPIC_API_KEY
 
 It validates the key, writes `rysh.config.yaml` **in the current directory**, and
 opens your session. Config is project-local by design — a different repo gets a
-different setup. Rysh searches `./rysh.config.yaml` first, then
-`~/.config/rysh/rysh.config.yaml`.
+different setup, and there is no global state root. Rysh looks for
+`./rysh.config.yaml`, then `./.rysh/rysh.config.yaml`, and stops there;
+`--config <path>` overrides both.
 
 No key? Rysh falls back to the `claude` CLI if it is installed. Set
 `provider.api_key` in the config to use the API directly instead.
@@ -156,6 +158,12 @@ Fail-closed by default: an assistant will not act on messages from someone who
 is not paired with you.
 
 ## Beyond the terminal
+
+Rysh Desktop is a native window around the same session, with the `rysh` binary
+bundled inside it — see
+[`rysh-cli-app-code`](https://github.com/rysh-ai/rysh-cli-app-code) to build it.
+The same renderer, minus Electron, is what `rysh web start` serves to a browser
+or a phone.
 
 ```sh
 rysh web start work              # browser viewer, prints a tokenised URL
