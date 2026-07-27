@@ -1,0 +1,32 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: rysh-cli-code/go.mod
+          cache-dependency-path: |
+            rysh-cli-code/go.sum
+            rysh-cli-shared/go.sum
+
+      - run: make vet
+      - run: make build
+      - run: ./bin/rysh --version
+
+      - run: make test

@@ -1,0 +1,12 @@
+go 1.25.3
+
+use (
+	./rysh-cli-code
+	./rysh-cli-shared
+)
+
+// rysh-cli-code requires the published rysh-cli-shared module. Inside this
+// workspace it resolves to the sibling checkout instead, so the two evolve
+// together without a release round-trip. The version here must match the
+// require directive in rysh-cli-code/go.mod.
+replace github.com/rysh-ai/rysh-cli-shared v0.1.0 => ./rysh-cli-shared

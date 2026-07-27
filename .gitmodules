@@ -1,0 +1,6 @@
+[submodule "rysh-cli-code"]
+	path = rysh-cli-code
+	url = https://github.com/rysh-ai/rysh-cli-code.git
+[submodule "rysh-cli-shared"]
+	path = rysh-cli-shared
+	url = https://github.com/rysh-ai/rysh-cli-shared.git
