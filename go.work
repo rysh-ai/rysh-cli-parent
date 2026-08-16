@@ -14,4 +14,4 @@ use (
 // rysh-cli-code tree being published in the same run and asserted to match its
 // `require` directive; a mismatch fails the publish. It used to be a comment
 // asking a human to keep the two in sync, and the human did not.
-replace github.com/rysh-ai/rysh-cli-shared v0.2.7 => ./rysh-cli-shared
+replace github.com/rysh-ai/rysh-cli-shared v0.2.9 => ./rysh-cli-shared
