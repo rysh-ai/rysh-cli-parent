@@ -1,6 +1,6 @@
 # Rysh
 
-An agentic terminal multiplexer, written in Go. One binary, no daemon zoo.
+An agentic development environment, written in Go. One binary, no daemon zoo.
 
 Rysh looks like a terminal multiplexer — tabs, panes, splits, `vim` and `htop` work
 exactly as you expect. The difference is that **every pane is also an agent**. The
